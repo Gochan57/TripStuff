@@ -1,11 +1,11 @@
 import {Action} from '../actions/types'
 import * as Model from '../../models'
 
-const defaultState: Model.AppState = {
+const defaultState: Model.Reducer1 = {
     field: true
 }
 
-export default (state = defaultState, action: Action): Model.AppState => {
+export default (state = defaultState, action: Action): Model.Reducer1 => {
     switch (action.type) {
         case 'someAction1': {
             return {
