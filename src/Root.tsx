@@ -3,14 +3,14 @@ import {Provider} from 'react-redux'
 import { StyleSheet, Text, View } from 'react-native'
 import store from './redux/store'
 
-import Container1 from './components/container1'
+import TripProperties from './components/TripProperties'
 
 export default class Root extends React.Component {
     render() {
         return (
             <Provider store={store}>
                 <View style={styles.container}>
-                    <Container1/>
+                    <TripProperties/>
                 </View>
             </Provider>
         );

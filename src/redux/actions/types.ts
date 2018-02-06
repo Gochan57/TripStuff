@@ -1,13 +1,8 @@
+import {TripProperty} from '../../models/state';
 export type Action =
     {
-        type: 'someAction1',
+        type: 'toggleTripProperty',
         payload: {
-            field1: boolean
-        }
-    } |
-    {
-        type: 'someAction2',
-        payload: {
-            field2: boolean
+            property: TripProperty
         }
     }

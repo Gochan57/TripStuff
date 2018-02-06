@@ -1,7 +1,9 @@
 export interface AppState {
-    reducer1: Reducer1
+    state: Reducer
 }
 
-export interface Reducer1 {
-    field: boolean
+export interface Reducer {
+    tripProperties: TripProperty[]
 }
+
+export type TripProperty = 'airplane' | 'sea' | 'skiing'
