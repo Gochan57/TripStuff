@@ -1,9 +1,5 @@
+import * as Model from '../models'
+
 export interface AppState {
-    state: Reducer
+    packs: Model.StuffPack[]
 }
-
-export interface Reducer {
-    tripProperties: TripProperty[]
-}
-
-export type TripProperty = 'airplane' | 'sea' | 'skiing'

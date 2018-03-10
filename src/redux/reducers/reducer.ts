@@ -1,26 +1,28 @@
-import {Action} from '../actions/types'
+import {Action} from '../../models/actions'
 import * as Model from '../../models'
+import * as Default from '../../models/default'
 
-const defaultState: Model.Reducer = {
-    tripProperties: []
-}
-
-export default (state = defaultState, action: Action): Model.Reducer => {
+export default (state = Default.AppState, action: Action): Model.AppState => {
     switch (action.type) {
-        case 'toggleTripProperty': {
-            const property = action.payload.property
-            if (!!state.tripProperties.find(p => p === property)) {
-                return {
-                    tripProperties: state.tripProperties.filter(p => p !== property),
-                }
+        case 'setPacks': {
+            return {
+                ...state,
+                packs: action.payload.packs
             }
-            else {
-                return {
-                    tripProperties: [
-                        ...state.tripProperties,
-                        property
-                    ]
-                }
+        }
+        case 'toggleTripProperty': {
+            const group = action.payload.group
+            return {
+                ...state,
+                packs: state.packs.map(pack => {
+                    if (pack.group === group) {
+                        return {
+                            ...pack,
+                            selected: !pack.selected
+                        }
+                    }
+                    return pack
+                })
             }
         }
         default: {

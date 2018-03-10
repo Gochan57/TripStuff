@@ -6,69 +6,63 @@ import CheckBox from 'react-native-checkbox'
 import * as Model from '../models'
 import * as Actions from '../redux/actions'
 import {
-    connect,
     Dispatch
+} from 'redux'
+import {
+    connect,
 } from 'react-redux';
-import {TripProperty} from '../models/state';
 
 export interface TripPropertiesProps {
 }
 
 export interface DispatchProps {
-    toggleTripProperty: (property: TripProperty) => void,
+    initApp: () => void
 }
 
 interface StateProps {
-    tripProperties: TripProperty[]
+    packs: Model.StuffPack[]
 }
 
-interface State {
-
-}
-
-class TripProperties extends React.Component<TripPropertiesProps & DispatchProps & StateProps, State> {
+class TripPropertiesContainer extends React.Component<TripPropertiesProps & DispatchProps & StateProps, void> {
     constructor (props: TripPropertiesProps & DispatchProps & StateProps) {
         super(props)
-        this.state = {}
-        console.log('props:', props)
     }
 
-    propertyLabel = {
-        airplane: 'самолет',
-        sea: 'море',
-        skiing: 'горнолыжка',
+    componentWillMount () {
+        this.props.initApp()
     }
 
-    renderProperty (property: TripProperty) {
-        console.log('label', this.propertyLabel[property])
-        console.log('checked', !!this.props.tripProperties.find(p => p === property))
+    renderProperty (pack: Model.StuffPack) {
         return (
             <CheckBox
-                label={this.propertyLabel[property]}
-                checked={!!this.props.tripProperties.find(p => p === property)}
-                onChange={(checked) => {this.props.toggleTripProperty(property)}}
+                label={pack.rus}
+                checked={pack.selected}
+                onChange={(checked) => {
+                    this.props.toggleTripProperty(pack.group)
+                }}
             />
         )
     }
 
     render () {
-        const tripProperties: TripProperty[] = ['airplane', 'sea', 'skiing']
         return (
             <View>
-                {tripProperties.map(property => this.renderProperty(property))}
+                {this.props.packs.map(pack => this.renderProperty(pack))}
             </View>
         )
     }
 }
 
-const mapStateToProps = (state: Model.AppState, ownProps: TripPropertiesProps): StateProps => {
+const mapStateToProps = (state: Model.AppState) => {
     return {
-        tripProperties: state.state.tripProperties
+        packs: state.packs
     }
 }
 
-const mapDispatchToProps = (dispatch: any): DispatchProps => ({
-    toggleTripProperty: (property: TripProperty) => dispatch(Actions.toggleTripProperty(property)),
-})
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+    return {
+        initApp: () => dispatch(Actions.initApp),
+    }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(TripProperties)
+export const TripProperties = connect(mapStateToProps, mapDispatchToProps)(TripPropertiesContainer)

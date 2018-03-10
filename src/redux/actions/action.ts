@@ -1,11 +1,27 @@
-import {Action} from './types';
-import {TripProperty} from '../../models/state';
+import * as Model from '../../models'
+import StuffService from '../../services/StuffService'
 
-export function toggleTripProperty (property: TripProperty): Action {
+export function initApp(): Function {
+    return (dispatch: Function, getState: () => Model.AppState) => {
+        dispatch(setPacks(StuffService.loadStuffFromResources()))
+    }
+}
+
+export function setPacks(packs: Model.StuffPack[]): Model.Action {
     return {
-        type: 'toggleTripProperty',
+        type: 'setPacks',
         payload: {
-            property
+            packs
         }
     }
 }
+
+export function toggleTripProperty (group: string): Model.Action {
+    return {
+        type: 'toggleTripProperty',
+        payload: {
+            group
+        }
+    }
+}
+
