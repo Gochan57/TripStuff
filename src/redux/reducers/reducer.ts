@@ -2,7 +2,7 @@ import {Action} from '../../models/actions'
 import * as Model from '../../models'
 import * as Default from '../../models/default'
 
-export default (state = Default.AppState, action: Action): Model.AppState => {
+const reducer = (state = Default.AppState, action: Action): Model.StuffState => {
     switch (action.type) {
         case 'setPacks': {
             return {
@@ -25,8 +25,8 @@ export default (state = Default.AppState, action: Action): Model.AppState => {
                 })
             }
         }
-        default: {
-            return state
-        }
     }
+    return state
 }
+
+export default reducer

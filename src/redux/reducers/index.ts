@@ -3,5 +3,5 @@ import {combineReducers} from 'redux'
 import reducer from './reducer'
 
 export default combineReducers({
-    state: reducer
+    stuff: reducer
 })

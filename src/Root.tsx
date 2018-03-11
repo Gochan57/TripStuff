@@ -5,7 +5,7 @@ import store from './redux/store'
 
 import {TripProperties} from './components/TripProperties'
 
-export default class Root extends React.Component {
+export default class Root extends React.Component<{}, void> {
     render() {
         return (
             <Provider store={store}>
@@ -23,5 +23,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-    },
+    } as React.ViewStyle,
 });

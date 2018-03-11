@@ -6,9 +6,6 @@ import CheckBox from 'react-native-checkbox'
 import * as Model from '../models'
 import * as Actions from '../redux/actions'
 import {
-    Dispatch
-} from 'redux'
-import {
     connect,
 } from 'react-redux';
 
@@ -16,6 +13,7 @@ export interface TripPropertiesProps {
 }
 
 export interface DispatchProps {
+    toggleTripProperty: (group: string) => void
     initApp: () => void
 }
 
@@ -35,9 +33,10 @@ class TripPropertiesContainer extends React.Component<TripPropertiesProps & Disp
     renderProperty (pack: Model.StuffPack) {
         return (
             <CheckBox
+                key={pack.group}
                 label={pack.rus}
                 checked={pack.selected}
-                onChange={(checked) => {
+                onChange={(checked: boolean) => {
                     this.props.toggleTripProperty(pack.group)
                 }}
             />
@@ -55,14 +54,8 @@ class TripPropertiesContainer extends React.Component<TripPropertiesProps & Disp
 
 const mapStateToProps = (state: Model.AppState) => {
     return {
-        packs: state.packs
+        packs: state.stuff.packs
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-    return {
-        initApp: () => dispatch(Actions.initApp),
-    }
-}
-
-export const TripProperties = connect(mapStateToProps, mapDispatchToProps)(TripPropertiesContainer)
+export const TripProperties = connect(mapStateToProps, {...Actions})(TripPropertiesContainer)

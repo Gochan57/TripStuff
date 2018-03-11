@@ -1,6 +1,6 @@
 import * as Model from '../models'
 import {StuffPack} from '../models'
-const packs: Model.StuffPackResource[] = require('../resources/stuff.json')
+import {packs} from '../resources/packs'
 
 class StuffService {
     public loadStuffFromResources(): Model.StuffPack[] {

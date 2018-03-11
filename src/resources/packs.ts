@@ -1,4 +1,6 @@
-[
+import * as Model from '../models'
+
+export const packs: Model.StuffPackResource[] = [
     {
         "group": "main",
         "rus": "основное",

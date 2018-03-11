@@ -1,5 +1,5 @@
 import * as Model from '../index'
 
-export const AppState: Model.AppState = {
+export const AppState: Model.StuffState = {
     packs: [],
 }
